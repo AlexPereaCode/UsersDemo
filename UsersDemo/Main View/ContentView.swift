@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var viewModel = ViewModel()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ForEach(viewModel.users, id: \.self) { user in
+            Text("\(user.name.first) \(user.name.last)")
+        }
+        
+        .task {
+            await viewModel.getData()
+        }
     }
 }
 
