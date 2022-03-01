@@ -15,8 +15,7 @@ struct User: Codable {
     let gender: Gender
     let name: Name
     let email: String
-    let dob, registered: Dob
-    let phone, cell: String
+    let phone: String
     let login: Login
     let picture: Picture
 }
@@ -32,13 +31,7 @@ extension User: Hashable {
 }
 
 struct Login: Codable {
-    let uuid, username, password, salt: String
-    let md5, sha1, sha256: String
-}
-
-struct Dob: Codable {
-    let date: String
-    let age: Int
+    let uuid: String
 }
 
 enum Gender: String, Codable {

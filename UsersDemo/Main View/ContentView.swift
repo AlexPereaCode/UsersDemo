@@ -12,10 +12,18 @@ struct ContentView: View {
     @StateObject var viewModel = ViewModel()
     
     var body: some View {
-        ForEach(viewModel.users, id: \.self) { user in
-            Text("\(user.name.first) \(user.name.last)")
-        }
         
+        NavigationView {
+            List {
+                ForEach(viewModel.users, id: \.self) { user in
+                    CardView(user: user)
+                }
+                .listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: 20, trailing: .zero))
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+            }
+            .navigationTitle("Users Example")
+        }
         .task {
             await viewModel.getData()
         }
